@@ -1,0 +1,7 @@
+function Update()
+   local http = require("socket.http")
+   local response, status, headers = http.request("https://api.etherscan.io/api?module=gastracker&action=gasoracle")
+   local gasData = json.decode(response)
+   local gasPrice = gasData.result.ProposeGasPrice / 1000000000
+   SKIN:Bang('!SetOption', 'GasMeter', 'Text', 'Gas Price: ' .. gasPrice .. ' Gwei')
+end
